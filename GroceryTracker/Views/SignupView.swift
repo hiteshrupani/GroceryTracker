@@ -31,6 +31,8 @@ struct SignupView: View {
             
             VStack (alignment: .leading) {
                 
+                // MARK: - Back Button
+
                 Image(systemName: "chevron.left")
                     .foregroundStyle(.background)
                     .padding()
