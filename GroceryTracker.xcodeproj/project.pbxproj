@@ -14,7 +14,11 @@
 		67407EBD2C91A53C0028AED8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67407EBC2C91A53C0028AED8 /* LoginView.swift */; };
 		67407EC22C91ACBF0028AED8 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67407EC12C91ACBF0028AED8 /* ButtonView.swift */; };
 		67407EC42C91ACD00028AED8 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67407EC32C91ACD00028AED8 /* TextFieldView.swift */; };
-		67BCAF2D2C91E4F800EFEF7E /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCAF2C2C91E4F800EFEF7E /* SignupView.swift */; };
+		67BCAF312C91E6A100EFEF7E /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCAF302C91E6A100EFEF7E /* Login.swift */; };
+		67BCAF332C91E74500EFEF7E /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCAF322C91E74500EFEF7E /* SignUp.swift */; };
+		67BCAF352C91E79A00EFEF7E /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCAF342C91E79A00EFEF7E /* Email.swift */; };
+		67BCAF372C91E81200EFEF7E /* OTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCAF362C91E81200EFEF7E /* OTP.swift */; };
+		67BCAF392C920A3400EFEF7E /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCAF382C920A3400EFEF7E /* SignupView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,7 +30,11 @@
 		67407EBC2C91A53C0028AED8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		67407EC12C91ACBF0028AED8 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		67407EC32C91ACD00028AED8 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
-		67BCAF2C2C91E4F800EFEF7E /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
+		67BCAF302C91E6A100EFEF7E /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		67BCAF322C91E74500EFEF7E /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
+		67BCAF342C91E79A00EFEF7E /* Email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
+		67BCAF362C91E81200EFEF7E /* OTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTP.swift; sourceTree = "<group>"; };
+		67BCAF382C920A3400EFEF7E /* SignupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +89,10 @@
 		67407EBE2C91A5450028AED8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				67BCAF302C91E6A100EFEF7E /* Login.swift */,
+				67BCAF322C91E74500EFEF7E /* SignUp.swift */,
+				67BCAF342C91E79A00EFEF7E /* Email.swift */,
+				67BCAF362C91E81200EFEF7E /* OTP.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -88,8 +100,8 @@
 		67407EBF2C91A54A0028AED8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				67BCAF382C920A3400EFEF7E /* SignupView.swift */,
 				67407EBC2C91A53C0028AED8 /* LoginView.swift */,
-				67BCAF2C2C91E4F800EFEF7E /* SignupView.swift */,
 				67407EC12C91ACBF0028AED8 /* ButtonView.swift */,
 				67407EC32C91ACD00028AED8 /* TextFieldView.swift */,
 			);
@@ -173,12 +185,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				67BCAF2D2C91E4F800EFEF7E /* SignupView.swift in Sources */,
+				67BCAF312C91E6A100EFEF7E /* Login.swift in Sources */,
 				67407EBD2C91A53C0028AED8 /* LoginView.swift in Sources */,
 				67407EC42C91ACD00028AED8 /* TextFieldView.swift in Sources */,
 				67407EAD2C91A1A00028AED8 /* ContentView.swift in Sources */,
+				67BCAF392C920A3400EFEF7E /* SignupView.swift in Sources */,
+				67BCAF352C91E79A00EFEF7E /* Email.swift in Sources */,
+				67BCAF332C91E74500EFEF7E /* SignUp.swift in Sources */,
 				67407EC22C91ACBF0028AED8 /* ButtonView.swift in Sources */,
 				67407EAB2C91A1A00028AED8 /* GroceryTrackerApp.swift in Sources */,
+				67BCAF372C91E81200EFEF7E /* OTP.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

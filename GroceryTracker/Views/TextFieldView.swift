@@ -13,16 +13,19 @@ struct TextFieldView: View {
     var isPassword: Bool = false
     var placeholder: String
     @Binding var text: String
-
+    var isMultiLine: Bool = false
+    var height: CGFloat = 50
+    
     var body: some View {
         if isPassword && isTextVisible {
             TextField(placeholder, text: $text)
                 .padding()
+                .frame(width: UIScreen.main.bounds.width /  1.2, height: height)
                 .background (
-                    Capsule()
+                    RoundedRectangle(cornerRadius: 27.5, style: .continuous)
+                        .inset(by: 0.5)
                         .stroke(Color.secondary, lineWidth: 1)
                 )
-                .frame(width: UIScreen.main.bounds.width /  1.25, height: 50)
                 .overlay(
                     HStack {
                         Spacer()
@@ -38,11 +41,12 @@ struct TextFieldView: View {
         } else if isPassword && !isTextVisible{
             SecureField(placeholder, text: $text)
                 .padding()
-                .background(
-                    Capsule()
+                .frame(width: UIScreen.main.bounds.width /  1.2, height: height)
+                .background (
+                    RoundedRectangle(cornerRadius: 27.5, style: .continuous)
+                        .inset(by: 0.5)
                         .stroke(Color.secondary, lineWidth: 1)
                 )
-                .frame(width: UIScreen.main.bounds.width / 1.25, height: 50)
                 .overlay(
                     HStack {
                         Spacer()
@@ -54,21 +58,32 @@ struct TextFieldView: View {
                             }
                     }
                 )
+        } else if isMultiLine {
+            TextEditor(text: $text)
+                .padding()
+                .frame(width: UIScreen.main.bounds.width /  1.2, height: height)
+                .background (
+                    RoundedRectangle(cornerRadius: 27.5, style: .continuous)
+                        .inset(by: 0.5)
+                        .stroke(Color.secondary, lineWidth: 1)
+                )
+                
         } else {
             TextField(placeholder, text: $text)
                 .padding()
+                .frame(width: UIScreen.main.bounds.width /  1.2, height: height)
                 .background (
-                    Capsule()
+                    RoundedRectangle(cornerRadius: 27.5, style: .continuous)
+                        .inset(by: 0.5)
                         .stroke(Color.secondary, lineWidth: 1)
                 )
-                .frame(width: UIScreen.main.bounds.width /  1.25, height: 50)
         }
     }
 }
 
 struct TextFieldView_Previews: PreviewProvider {
     static var previews: some View {
-        TextFieldView(isTextVisible: .constant(true), isPassword: true, placeholder: "Enter password", text: .constant(""))
+        TextFieldView(isTextVisible: .constant(true), isPassword: false, placeholder: "Enter password", text: .constant(""), isMultiLine: false)
             .previewLayout(.sizeThatFits)
     }
 }

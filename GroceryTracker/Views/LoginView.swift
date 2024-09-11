@@ -10,7 +10,7 @@ import SwiftUI
 struct LoginView: View {
     
     @State var isPasswordVisible: Bool = false
-    @State private var username: String = ""
+    @State private var email: String = ""
     @State private var password: String = ""
     
     var body: some View {
@@ -23,7 +23,7 @@ struct LoginView: View {
             
             RoundedRectangle(cornerRadius: 30)
                 .fill(.background)
-                .frame(width: UIScreen.main.bounds.width / 1, height: 500)
+                .frame(width: UIScreen.main.bounds.width / 1, height: UIScreen.main.bounds.height / 1.7)
                 .offset(y: 200)
                 .ignoresSafeArea()
             
@@ -67,9 +67,9 @@ struct LoginView: View {
                 
                 // MARK: - TextFields
                 VStack (alignment: .leading) {
-                    Text("Username")
+                    Text("Email")
                         .font(.headline)
-                    TextFieldView(isTextVisible: .constant(true), placeholder: "Enter your username", text: $username)
+                    TextFieldView(isTextVisible: .constant(true), placeholder: "Enter your email", text: $email)
                     
                     Text("Password")
                         .font(.headline)
@@ -91,7 +91,7 @@ struct LoginView: View {
                             
                         }
                     }
-                    .frame(width: UIScreen.main.bounds.width /  1.25)
+                    .frame(width: UIScreen.main.bounds.width /  1.2)
                     .padding(.vertical)
                     
                     ButtonView(text: "Login")
@@ -120,7 +120,7 @@ struct CreateAccountButton: View {
         } label: {
             Text("Create account")
                 .padding()
-                .frame(width: UIScreen.main.bounds.width /  1.25, height: 50)
+                .frame(width: UIScreen.main.bounds.width /  1.2, height: 50)
                 .foregroundStyle(Color.accentColor)
                 .background(
                     Capsule()

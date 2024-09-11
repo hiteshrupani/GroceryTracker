@@ -17,7 +17,7 @@ struct ButtonView: View {
         } label: {
             Text(text)
                 .padding()
-                .frame(width: UIScreen.main.bounds.width /  1.25, height: 50)
+                .frame(width: UIScreen.main.bounds.width /  1.2, height: 50)
                 .foregroundStyle(Color.white)
                 .background(
                     Capsule()
