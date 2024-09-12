@@ -91,11 +91,9 @@ struct EmailVerificationView: View {
     func verifyEmail() {
         updateEmail()
         
-//        signupVM.signUp(completion: {error in
-//            print(error)
-//        })
-        
         viewModel.requestOTP()
+        
+        signupVM.signUp()
         
         showOTPView = true
     }

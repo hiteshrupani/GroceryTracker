@@ -25,8 +25,8 @@ struct HomeView: View {
                     UpcomingExpiryView()
                 }
                 .padding()
-                .background(Color(.systemGroupedBackground))
             }
+            .background(Color(.systemGroupedBackground))
             .navigationBarItems(leading: HeaderView())
             .navigationBarItems(trailing: SubscribeButton())
             .toolbarBackground(.visible, for: .navigationBar)
@@ -145,6 +145,7 @@ struct ExpiringSoonView: View {
                 HStack {
                     Text("Total Products")
                     Text("0")
+                        .foregroundStyle(Color.gray)
                         .padding(5)
                         .background(
                             Circle()
@@ -187,37 +188,45 @@ struct ExpiringSoonView: View {
 
 struct UpcomingExpiryView: View {
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("Upcoming Expiry products")
+        VStack (alignment: .leading) {
+            Text("Upcoming Expiry Products")
                 .font(.headline)
             
-            HStack {
-                Text("Total Products")
-                Spacer()
-                Text("0")
-                    .padding(5)
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(10)
-                Text("View all")
-                    .foregroundColor(.green)
+            VStack(alignment: .center, spacing: 10) {
+                HStack {
+                    Text("Total Products")
+                    Text("0")
+                        .padding(5)
+                        .background(
+                            Circle()
+                                .stroke(Color.white.opacity(0.8), lineWidth: 1)
+                        )
+                    
+                    Spacer()
+                    
+                    Text("View all")
+                }
+                .font(.headline)
+                
+                Image(systemName: "cart")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 100)
+                    .foregroundStyle(Color.secondary)
+                    .padding()
+                
+                Text("Your cart is empty")
+                    .font(.headline)
+                
+                Text("Let's fill your cart with Grocery tracker and Make your life easy! 🌿🛒")
+                    .font(.caption)
+                    .multilineTextAlignment(.center)
             }
-            
-            Image(systemName: "cart")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 100)
-                .foregroundColor(.gray)
-            
-            Text("Your cart is empty")
-                .font(.headline)
-            
-            Text("Let's fill your cart with Grocery tracker and Make your life easy! 🌿🛒")
-                .font(.subheadline)
-                .multilineTextAlignment(.center)
+            .foregroundStyle(Color.white)
+            .padding()
+            .background(Color.accentColor)
+            .clipShape(RoundedRectangle(cornerRadius: 15))
         }
-        .padding()
-        .background(Color.green.opacity(0.1))
-        .cornerRadius(10)
     }
 }
 
