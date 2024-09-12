@@ -12,14 +12,12 @@ struct EmailVerificationOTPView: View {
     @StateObject var viewModel = EmailVerificationViewModel()
     @StateObject var signupVM = SignupViewModel()
     @Binding var showOTPView: Bool
+    @State var showLoginView: Bool = false
 
     @State private var otp = Array(repeating: "", count: 4)
     @State private var timeRemaining: Int = 60
     @State private var canResend: Bool = true
     @FocusState private var inFocus: Int?
-    
-    
-    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         NavigationStack {
@@ -113,6 +111,9 @@ struct EmailVerificationOTPView: View {
                         ButtonView(text: "Create Account", action: verify)
                             .padding(.top)
                         // navigate to email verification
+                            .navigationDestination(isPresented: $showLoginView, destination: {
+                                LoginView()
+                            })
                     }
                     
                     Spacer()
@@ -131,7 +132,7 @@ struct EmailVerificationOTPView: View {
         
         viewModel.verifyOTP()
         
-        dismiss()
+        showLoginView = true
     }
     
     func resendOTP() {
