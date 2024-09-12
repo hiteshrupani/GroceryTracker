@@ -8,18 +8,20 @@
 import SwiftUI
 
 struct SignupView: View {
-    @ObservedObject var viewModel: SignupViewModel = SignupViewModel()
+    @StateObject var viewModel: SignupViewModel = SignupViewModel()
+    @Environment(\.dismiss) var dismiss
+    @State var showEmailVerificationView: Bool = false
     
     @State private var isPasswordVisible: Bool = false
     @State private var isConfirmPasswordVisible: Bool = false
+    
     @State private var name: String = SignupViewModel.shared.user.name
     @State private var phone: String = SignupViewModel.shared.user.phone
     @State private var address: String = SignupViewModel.shared.user.address
     @State private var password: String = SignupViewModel.shared.user.password
     @State private var confirmPassword: String = SignupViewModel.shared.user.password
     
-    @Environment(\.dismiss) var dismiss
-    @State private var showEmailVerificationView: Bool = false
+    
     
     var body: some View {
         NavigationStack {
@@ -41,7 +43,7 @@ struct SignupView: View {
                     BackButtonView() {
                         dismiss()
                     }
-                        
+                    
                     
                     Title()
                     
@@ -87,15 +89,17 @@ struct SignupView: View {
                             
                             // MARK: - Create Account Button
                             ButtonView(text: "Create Account", action: saveUserDetails)
-                            .padding(.top)
+                                .padding(.top)
+                        }
+                        .fullScreenCover(isPresented: $showEmailVerificationView) {
+                            EmailVerificationView(showEmailVerificationView: $showEmailVerificationView)
                         }
                     }
-                }
-                .navigationDestination(isPresented: $showEmailVerificationView) {
-                    EmailVerificationView(showEmailVerificationView: $showEmailVerificationView)
+                    
                 }
             }
         }
+        
         .navigationBarBackButtonHidden(true)
     }
     
@@ -110,7 +114,7 @@ struct SignupView: View {
         
         SignupViewModel.shared.user = SignUpRequest(name: name, email: "", address: address, phone: phone, password: password)
         
-//        print(SignupViewModel.shared.user)
+        //        print(SignupViewModel.shared.user)
         
         showEmailVerificationView = true
     }

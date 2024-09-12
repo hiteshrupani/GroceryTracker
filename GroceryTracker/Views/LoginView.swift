@@ -9,12 +9,12 @@ import SwiftUI
 
 struct LoginView: View {
     
+    @StateObject var viewModel = LoginViewModel()
+    
     @State var isPasswordVisible: Bool = false
-    @State private var email: String = ""
-    @State private var password: String = ""
     
     @State private var showSignupView: Bool = false
-    @State private var showHomeView: Bool = false
+    @State var showHomeView: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -73,12 +73,14 @@ struct LoginView: View {
                     VStack (alignment: .leading) {
                         Text("Email")
                             .font(.headline)
-                        TextFieldView(isTextVisible: .constant(true), placeholder: "Enter your email", text: $email)
+                        TextFieldView(isTextVisible: .constant(true), placeholder: "Enter your email", text: $viewModel.email)
+                            .autocorrectionDisabled(true)
+                            .textInputAutocapitalization(.never)
                         
                         Text("Password")
                             .font(.headline)
                             .padding(.top)
-                        TextFieldView(isTextVisible: $isPasswordVisible, isPassword: true, placeholder: "Enter your password", text: $password)
+                        TextFieldView(isTextVisible: $isPasswordVisible, isPassword: true, placeholder: "Enter your password", text: $viewModel.password)
                             
                             
                             
@@ -110,13 +112,18 @@ struct LoginView: View {
                     .navigationDestination(isPresented: $showSignupView, destination: {
                         SignupView()
                     })
+                    
+                    .navigationDestination(isPresented: $viewModel.isLoggedIn, destination: {
+                        HomeView()
+                    })
                 }
             }
         }
     }
     
     func login() {
-        showHomeView.toggle()
+
+        viewModel.login()
     }
     
     func createAccount() {

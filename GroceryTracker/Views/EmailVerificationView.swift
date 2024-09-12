@@ -9,8 +9,8 @@ import SwiftUI
 
 struct EmailVerificationView: View {
     
-    @ObservedObject var viewModel = EmailVerificationViewModel()
-    @ObservedObject var signupVM = SignupViewModel()
+    @StateObject var viewModel = EmailVerificationViewModel()
+    @StateObject var signupVM = SignupViewModel()
     @State private var email = ""
     
     @Binding var showEmailVerificationView: Bool
@@ -77,7 +77,7 @@ struct EmailVerificationView: View {
                             
                         // navigate to email verification
                     }
-                    .navigationDestination(isPresented: $showOTPView) {
+                    .fullScreenCover(isPresented: $showOTPView) {
                         EmailVerificationOTPView(showOTPView: $showOTPView)
                     }
                     

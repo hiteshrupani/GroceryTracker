@@ -12,14 +12,14 @@ struct LoginRequest {
     var password: String
 }
 
-struct LoginResponse {
+struct LoginResponse: Codable {
     var message: String
     var success: Bool
     var token: String
     var user: User
 }
 
-struct User {
+struct User: Codable {
     var user_id: String
     var name: String = ""
     var email: String

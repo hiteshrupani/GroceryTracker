@@ -9,15 +9,16 @@ import SwiftUI
 
 struct EmailVerificationOTPView: View {
     
-    @ObservedObject var viewModel = EmailVerificationViewModel()
-    @ObservedObject var signupVM = SignupViewModel()
-    
+    @StateObject var viewModel = EmailVerificationViewModel()
+    @StateObject var signupVM = SignupViewModel()
+    @Binding var showOTPView: Bool
+
     @State private var otp = Array(repeating: "", count: 4)
     @State private var timeRemaining: Int = 60
     @State private var canResend: Bool = true
     @FocusState private var inFocus: Int?
     
-    @Binding var showOTPView: Bool
+    
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -128,15 +129,9 @@ struct EmailVerificationOTPView: View {
     func verify() {
         viewModel.otp = otp.joined()
         
-//        print(viewModel.otp)
-        
         viewModel.verifyOTP()
         
-        if (viewModel.isVerified) {
-            dismiss()
-        }
-        
-        
+        dismiss()
     }
     
     func resendOTP() {

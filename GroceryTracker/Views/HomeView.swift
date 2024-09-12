@@ -27,11 +27,13 @@ struct HomeView: View {
                 .padding()
             }
             .background(Color(.systemGroupedBackground))
+            
             .navigationBarItems(leading: HeaderView())
             .navigationBarItems(trailing: SubscribeButton())
             .toolbarBackground(.visible, for: .navigationBar)
             
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
