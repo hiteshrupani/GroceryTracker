@@ -9,7 +9,8 @@ import SwiftUI
 
 struct EmailVerificationView: View {
     
-    @ObservedObject var viewModel = SignupViewModel()
+    @ObservedObject var viewModel = EmailVerificationViewModel()
+    @ObservedObject var signupVM = SignupViewModel()
     @State private var email = ""
     
     @Binding var showEmailVerificationView: Bool
@@ -69,6 +70,8 @@ struct EmailVerificationView: View {
                             .font(.headline)
                         TextFieldView(isTextVisible: .constant(true), placeholder: "Enter your email", text: $email)
                             .padding(.bottom)
+                            .autocorrectionDisabled(true)
+                            .textInputAutocapitalization(TextInputAutocapitalization.never)
                         
                         ButtonView(text: "Verify Email Address", action: verifyEmail)
                             
@@ -88,7 +91,11 @@ struct EmailVerificationView: View {
     func verifyEmail() {
         updateEmail()
         
+//        signupVM.signUp(completion: {error in
+//            print(error)
+//        })
         
+        viewModel.requestOTP()
         
         showOTPView = true
     }
@@ -96,7 +103,8 @@ struct EmailVerificationView: View {
     func updateEmail() {
         SignupViewModel.shared.user.email = email
         
-        print(SignupViewModel.shared.user)
+        viewModel.email = email
+//        print(SignupViewModel.shared.user)
     }
 }
 

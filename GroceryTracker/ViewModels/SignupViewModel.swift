@@ -14,7 +14,7 @@ final class SignupViewModel: ObservableObject {
     static let shared = SignupViewModel()
     private let baseURL = "https://grocery-backend-t65p.onrender.com/user/sign-up"
     
-    func signUp(user: SignUpRequest, completion: @escaping (Result<Bool, Error>) -> Void) {
+    func signUp(completion: @escaping (Result<Bool, Error>) -> Void) {
         guard let url = URL(string: baseURL) else {
             return
         }
@@ -36,6 +36,11 @@ final class SignupViewModel: ObservableObject {
                     completion(.failure(error))
                     return
                 }
+            
+            print("SIGN UP")
+            print(data ?? "")
+            print(response ?? "")
+            print(error ?? "")
             
             guard let httpResonse = response as? HTTPURLResponse, httpResonse.statusCode == 200 else {
                 let apiError = NSError(domain: "API Error", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to sign up."])

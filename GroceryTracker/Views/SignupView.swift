@@ -110,7 +110,7 @@ struct SignupView: View {
         
         SignupViewModel.shared.user = SignUpRequest(name: name, email: "", address: address, phone: phone, password: password)
         
-        print(SignupViewModel.shared.user)
+//        print(SignupViewModel.shared.user)
         
         showEmailVerificationView = true
     }

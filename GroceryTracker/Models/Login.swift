@@ -25,5 +25,5 @@ struct User {
     var email: String
     var phone: String = ""
     var address: String = ""
-//    var profile_image: String
+    var profile_image: String
 }

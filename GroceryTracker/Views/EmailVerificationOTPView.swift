@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct EmailVerificationOTPView: View {
-    @State private var email = "lol@gmail.com"
+    
+    @ObservedObject var viewModel = EmailVerificationViewModel()
+    @ObservedObject var signupVM = SignupViewModel()
+    
     @State private var otp = Array(repeating: "", count: 4)
     @State private var timeRemaining: Int = 60
     @State private var canResend: Bool = true
     @FocusState private var inFocus: Int?
     
     @Binding var showOTPView: Bool
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         NavigationStack {
@@ -69,7 +73,7 @@ struct EmailVerificationOTPView: View {
                             .padding(.vertical)
                             .frame(width: UIScreen.main.bounds.width / 1.2, alignment: .leading)
                         
-                        Text(email)
+                        Text(viewModel.email)
                             .font(.headline)
                         
                         // MARK: - OTP Fields
@@ -105,7 +109,7 @@ struct EmailVerificationOTPView: View {
                         }
                         .frame(width: UIScreen.main.bounds.width / 1.2, alignment: .center)
                         
-                        ButtonView(text: "Create Account", action: {})
+                        ButtonView(text: "Create Account", action: verify)
                             .padding(.top)
                         // navigate to email verification
                     }
@@ -118,8 +122,29 @@ struct EmailVerificationOTPView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
+        
     }
     
+    func verify() {
+        viewModel.otp = otp.joined()
+        
+//        print(viewModel.otp)
+        
+        viewModel.verifyOTP()
+        
+        if (viewModel.isVerified) {
+            dismiss()
+        }
+        
+        
+    }
+    
+    func resendOTP() {
+            
+    }
+    
+    // MARK: - UI Update Functions
+
     func startTimer() {
         canResend = false
         timeRemaining = 60
@@ -132,11 +157,7 @@ struct EmailVerificationOTPView: View {
             }
         }
     }
-    
-    func resendOTP() {
-        
-    }
-    
+
     func formattedTime(_ totalSeconds: Int) -> String {
         let minutes = totalSeconds / 60
         let seconds = totalSeconds % 60
@@ -148,9 +169,7 @@ struct EmailVerificationOTPView: View {
             inFocus = index + 1
         }
     }
-    
 }
-
 
 #Preview {
     EmailVerificationOTPView(showOTPView: .constant(true))

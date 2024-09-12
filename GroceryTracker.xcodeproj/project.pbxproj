@@ -16,8 +16,6 @@
 		67407EC42C91ACD00028AED8 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67407EC32C91ACD00028AED8 /* TextFieldView.swift */; };
 		67BCAF312C91E6A100EFEF7E /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCAF302C91E6A100EFEF7E /* Login.swift */; };
 		67BCAF332C91E74500EFEF7E /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCAF322C91E74500EFEF7E /* SignUp.swift */; };
-		67BCAF352C91E79A00EFEF7E /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCAF342C91E79A00EFEF7E /* Email.swift */; };
-		67BCAF372C91E81200EFEF7E /* OTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCAF362C91E81200EFEF7E /* OTP.swift */; };
 		67BCAF392C920A3400EFEF7E /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCAF382C920A3400EFEF7E /* SignupView.swift */; };
 		67BCAF3B2C920B2A00EFEF7E /* EmailVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCAF3A2C920B2A00EFEF7E /* EmailVerificationView.swift */; };
 		67BCAF3D2C920DE300EFEF7E /* EmailVerificationOTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCAF3C2C920DE300EFEF7E /* EmailVerificationOTPView.swift */; };
@@ -25,6 +23,7 @@
 		67BCAF412C9223EE00EFEF7E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCAF402C9223EE00EFEF7E /* LoginViewModel.swift */; };
 		67BCAF432C92243B00EFEF7E /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCAF422C92243B00EFEF7E /* SignupViewModel.swift */; };
 		67BCAF472C92250F00EFEF7E /* BackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCAF462C92250F00EFEF7E /* BackButtonView.swift */; };
+		67BCAF492C92E87700EFEF7E /* EmailVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCAF482C92E87700EFEF7E /* EmailVerificationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,8 +37,6 @@
 		67407EC32C91ACD00028AED8 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		67BCAF302C91E6A100EFEF7E /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		67BCAF322C91E74500EFEF7E /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
-		67BCAF342C91E79A00EFEF7E /* Email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
-		67BCAF362C91E81200EFEF7E /* OTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTP.swift; sourceTree = "<group>"; };
 		67BCAF382C920A3400EFEF7E /* SignupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		67BCAF3A2C920B2A00EFEF7E /* EmailVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationView.swift; sourceTree = "<group>"; };
 		67BCAF3C2C920DE300EFEF7E /* EmailVerificationOTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationOTPView.swift; sourceTree = "<group>"; };
@@ -47,6 +44,7 @@
 		67BCAF402C9223EE00EFEF7E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		67BCAF422C92243B00EFEF7E /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		67BCAF462C92250F00EFEF7E /* BackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonView.swift; sourceTree = "<group>"; };
+		67BCAF482C92E87700EFEF7E /* EmailVerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,8 +101,6 @@
 			children = (
 				67BCAF302C91E6A100EFEF7E /* Login.swift */,
 				67BCAF322C91E74500EFEF7E /* SignUp.swift */,
-				67BCAF342C91E79A00EFEF7E /* Email.swift */,
-				67BCAF362C91E81200EFEF7E /* OTP.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -129,6 +125,7 @@
 			children = (
 				67BCAF402C9223EE00EFEF7E /* LoginViewModel.swift */,
 				67BCAF422C92243B00EFEF7E /* SignupViewModel.swift */,
+				67BCAF482C92E87700EFEF7E /* EmailVerificationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -209,16 +206,15 @@
 				67407EC42C91ACD00028AED8 /* TextFieldView.swift in Sources */,
 				67407EAD2C91A1A00028AED8 /* ContentView.swift in Sources */,
 				67BCAF3B2C920B2A00EFEF7E /* EmailVerificationView.swift in Sources */,
+				67BCAF492C92E87700EFEF7E /* EmailVerificationViewModel.swift in Sources */,
 				67BCAF432C92243B00EFEF7E /* SignupViewModel.swift in Sources */,
 				67BCAF472C92250F00EFEF7E /* BackButtonView.swift in Sources */,
 				67BCAF412C9223EE00EFEF7E /* LoginViewModel.swift in Sources */,
 				67BCAF392C920A3400EFEF7E /* SignupView.swift in Sources */,
 				67BCAF3D2C920DE300EFEF7E /* EmailVerificationOTPView.swift in Sources */,
-				67BCAF352C91E79A00EFEF7E /* Email.swift in Sources */,
 				67BCAF332C91E74500EFEF7E /* SignUp.swift in Sources */,
 				67407EC22C91ACBF0028AED8 /* ButtonView.swift in Sources */,
 				67407EAB2C91A1A00028AED8 /* GroceryTrackerApp.swift in Sources */,
-				67BCAF372C91E81200EFEF7E /* OTP.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

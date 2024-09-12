@@ -15,3 +15,24 @@ struct SignUpRequest: Codable {
     var password: String
 //    var profile_image: String
 }
+
+struct EmailRequest: Codable {
+    var email: String
+    
+    var reason: String = " sign-up"
+}
+
+struct EmailResponse: Codable {
+    var message: String
+    var success: Bool
+}
+
+struct OTPRequest: Codable {
+    var email: String
+    var otp: String
+}
+
+struct OTPResponse: Codable {
+    var message: String
+    var success: Bool
+}
