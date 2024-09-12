@@ -11,13 +11,17 @@ struct EmailVerificationOTPView: View {
     
     @StateObject var viewModel = EmailVerificationViewModel()
     @StateObject var signupVM = SignupViewModel()
-    @Binding var showOTPView: Bool
-    @State var showLoginView: Bool = false
+    
+    @Binding var showEmailVerificationOTPView: Bool
+    @State var showSignUpView: Bool = false
 
     @State private var otp = Array(repeating: "", count: 4)
     @State private var timeRemaining: Int = 60
     @State private var canResend: Bool = true
     @FocusState private var inFocus: Int?
+    
+    @State var showAlert = false
+    @State var alertMessage: String = "Some error occured!"
     
     var body: some View {
         NavigationStack {
@@ -39,7 +43,7 @@ struct EmailVerificationOTPView: View {
                     // MARK: - Back Button
                     
                     BackButtonView {
-                        showOTPView = false
+                        showEmailVerificationOTPView.toggle()
                     }
                     
                     Spacer()
@@ -111,9 +115,10 @@ struct EmailVerificationOTPView: View {
                         ButtonView(text: "Create Account", action: verify)
                             .padding(.top)
                         // navigate to email verification
-                            .navigationDestination(isPresented: $showLoginView, destination: {
-                                LoginView()
-                            })
+                            
+                    }
+                    .fullScreenCover(isPresented: $showSignUpView) {
+                        SignupView(showSignupView: $showSignUpView)
                     }
                     
                     Spacer()
@@ -124,24 +129,33 @@ struct EmailVerificationOTPView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
-        
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+        }
     }
     
-    func verify() {
+    private func verify() {
+        
+        if otp.joined().isEmpty || otp.joined().count < 4 {
+            alertMessage = "Please enter the OTP"
+            showAlert.toggle()
+            return
+        }
+        
         viewModel.otp = otp.joined()
         
         viewModel.verifyOTP()
         
-        showLoginView = true
+        showSignUpView.toggle()
     }
     
-    func resendOTP() {
+    private func resendOTP() {
             
     }
     
     // MARK: - UI Update Functions
 
-    func startTimer() {
+    private func startTimer() {
         canResend = false
         timeRemaining = 60
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
@@ -154,13 +168,13 @@ struct EmailVerificationOTPView: View {
         }
     }
 
-    func formattedTime(_ totalSeconds: Int) -> String {
+    private func formattedTime(_ totalSeconds: Int) -> String {
         let minutes = totalSeconds / 60
         let seconds = totalSeconds % 60
         return String(format: "%02d:%02d", minutes, seconds)
     }
     
-    func moveToNextField(current index: Int) {
+    private func moveToNextField(current index: Int) {
         if index < otp.count - 1 {
             inFocus = index + 1
         }
@@ -168,7 +182,7 @@ struct EmailVerificationOTPView: View {
 }
 
 #Preview {
-    EmailVerificationOTPView(showOTPView: .constant(true))
+    EmailVerificationOTPView(showEmailVerificationOTPView: .constant(true))
 }
 
 struct OTPTextField: View {

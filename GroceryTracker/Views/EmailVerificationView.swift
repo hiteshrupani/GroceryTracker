@@ -13,8 +13,12 @@ struct EmailVerificationView: View {
     @StateObject var signupVM = SignupViewModel()
     @State private var email = ""
     
-    @Binding var showEmailVerificationView: Bool
-    @State var showOTPView: Bool = false
+    @Environment(\.dismiss) var dismiss
+    
+    @State var showEmailVerificationOTPView: Bool = false
+    
+    @State var showAlert = false
+    @State var alertMessage = "Some error occured!"
     
     var body: some View {
         NavigationStack {
@@ -37,7 +41,7 @@ struct EmailVerificationView: View {
                     
                     BackButtonView() {
                             // navigate to previous screen
-                            showEmailVerificationView = false
+                            dismiss()
                         }
                     
                     Spacer()
@@ -77,35 +81,54 @@ struct EmailVerificationView: View {
                             
                         // navigate to email verification
                     }
-                    .fullScreenCover(isPresented: $showOTPView) {
-                        EmailVerificationOTPView(showOTPView: $showOTPView)
+                    .fullScreenCover(isPresented: $showEmailVerificationOTPView) {
+                        EmailVerificationOTPView(showEmailVerificationOTPView: $showEmailVerificationOTPView)
                     }
                     
                     Spacer()
                 }
             }
             .navigationBarBackButtonHidden(true)
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+            }
         }
     }
     
-    func verifyEmail() {
+    private func verifyEmail() {
+        
+        if email.isEmpty {
+            alertMessage = "Email cannot be empty"
+            showAlert.toggle()
+            return
+        }
+        
+        if !isValidEmail() {
+            alertMessage = "Please enter a valid email"
+            showAlert.toggle()
+            return
+        }
+        
         updateEmail()
         
         viewModel.requestOTP()
         
-        signupVM.signUp()
-        
-        showOTPView = true
+        showEmailVerificationOTPView.toggle()
     }
     
-    func updateEmail() {
-        SignupViewModel.shared.user.email = email
+    private func updateEmail() {
         
         viewModel.email = email
 //        print(SignupViewModel.shared.user)
     }
+    
+    private func isValidEmail() -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
+    }
 }
 
 #Preview {
-    EmailVerificationView(showEmailVerificationView: .constant(true))
+    EmailVerificationView()
 }

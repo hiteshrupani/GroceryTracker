@@ -11,10 +11,13 @@ struct LoginView: View {
     
     @StateObject var viewModel = LoginViewModel()
     
+    @State private var showEmailVerificationView: Bool = false
+    @State var showHomeView: Bool = false
+    
     @State var isPasswordVisible: Bool = false
     
-    @State private var showSignupView: Bool = false
-    @State var showHomeView: Bool = false
+    @State var showAlert: Bool = false
+    @State var alertMessage: String = "Some error occured!"
     
     var body: some View {
         NavigationStack {
@@ -109,8 +112,8 @@ struct LoginView: View {
                         
                         // navigate to signup view
                     }
-                    .navigationDestination(isPresented: $showSignupView, destination: {
-                        SignupView()
+                    .navigationDestination(isPresented: $showEmailVerificationView, destination: {
+                        EmailVerificationView()
                     })
                     
                     .navigationDestination(isPresented: $viewModel.isLoggedIn, destination: {
@@ -120,15 +123,24 @@ struct LoginView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+        }
     }
     
-    func login() {
-
+    private func login() {
+        
+        if viewModel.email.isEmpty || viewModel.password.isEmpty {
+            alertMessage = "Please enter your email and password"
+            showAlert.toggle()
+            return
+        }
+        
         viewModel.login()
     }
     
-    func createAccount() {
-        showSignupView.toggle()
+    private func createAccount() {
+        showEmailVerificationView.toggle()
     }
     
 }

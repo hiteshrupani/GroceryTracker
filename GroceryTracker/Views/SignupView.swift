@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct SignupView: View {
-    @StateObject var viewModel: SignupViewModel = SignupViewModel()
-    @Environment(\.dismiss) var dismiss
-    @State var showEmailVerificationView: Bool = false
+    @StateObject var viewModel = SignupViewModel()
+    @StateObject var emailVM = EmailVerificationViewModel()
+    @StateObject var loginVM = LoginViewModel()
+    
+    @Binding var showSignupView: Bool
+    @State var showAlert: Bool = false
+    @State var alertMessage: String = "Some error occured!"
     
     @State private var isPasswordVisible: Bool = false
     @State private var isConfirmPasswordVisible: Bool = false
@@ -41,7 +45,7 @@ struct SignupView: View {
                 VStack (alignment: .leading) {
                     
                     BackButtonView() {
-                        dismiss()
+                        showSignupView.toggle()
                     }
                     
                     
@@ -90,39 +94,56 @@ struct SignupView: View {
                             // MARK: - Create Account Button
                             ButtonView(text: "Create Account", action: saveUserDetails)
                                 .padding(.top)
+                                
                         }
-                        .fullScreenCover(isPresented: $showEmailVerificationView) {
-                            EmailVerificationView(showEmailVerificationView: $showEmailVerificationView)
-                        }
+                        
+                        
                     }
-                    
                 }
             }
         }
         
         .navigationBarBackButtonHidden(true)
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Error!"),
+                  message: Text(alertMessage),
+                  dismissButton: .default(Text("OK")))
+        }
     }
     
     func saveUserDetails() {
         
-        if password != confirmPassword {
-            print("Password do not match")
-            // alert
+        if name.isEmpty || phone.isEmpty || address.isEmpty || password.isEmpty || confirmPassword.isEmpty {
+            print("All fields are required")
+            
+            showAlert = true
+            alertMessage = "All fields are required"
             
             return
         }
         
-        SignupViewModel.shared.user = SignUpRequest(name: name, email: "", address: address, phone: phone, password: password)
+        if password != confirmPassword {
+            print("Password do not match")
+            
+            showAlert = true
+            
+            return
+        }
         
-        //        print(SignupViewModel.shared.user)
+        SignupViewModel.shared.user = SignUpRequest(name: name, email: emailVM.email , address: address, phone: phone, password: password)
         
-        showEmailVerificationView = true
+        viewModel.signUp()
+        
+        loginVM.email = emailVM.email
+        loginVM.password = password
+        
+        loginVM.login()
     }
     
 }
 
 #Preview {
-    SignupView()
+    SignupView(showSignupView: .constant(true))
 }
 
 struct Title: View {
