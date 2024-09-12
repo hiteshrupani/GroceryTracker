@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SignUpRequest {
+struct SignUpRequest: Codable {
     var name: String = ""
     var email: String
     var address: String = ""

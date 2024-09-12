@@ -14,114 +14,110 @@ struct EmailVerificationOTPView: View {
     @State private var canResend: Bool = true
     @FocusState private var inFocus: Int?
     
+    @Binding var showOTPView: Bool
+    
     var body: some View {
-        ZStack {
-            Image(.background)
-                .resizable()
-                .scaledToFill()
-                .edgesIgnoringSafeArea(.all)
-                .overlay(Color.black.opacity(0.5))
-            
-            RoundedRectangle(cornerRadius: 30)
-                .fill(.background)
-                .frame(width: UIScreen.main.bounds.width / 1, height: UIScreen.main.bounds.height / 1.7)
-                .offset(y: 200)
-                .ignoresSafeArea()
-            
-            VStack (alignment: .leading) {
+        NavigationStack {
+            ZStack {
+                Image(.background)
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+                    .overlay(Color.black.opacity(0.5))
                 
-                // MARK: - Back Button
+                RoundedRectangle(cornerRadius: 30)
+                    .fill(.background)
+                    .frame(width: UIScreen.main.bounds.width / 1, height: UIScreen.main.bounds.height / 1.7)
+                    .offset(y: 200)
+                    .ignoresSafeArea()
                 
-                Image(systemName: "chevron.left")
-                    .foregroundStyle(.background)
-                    .padding()
-                    .frame(width: 40, height: 40)
-                    .background(
-                        Circle()
-                            .fill(Color.white.opacity(0.4))
-                    )
-                    .padding(.bottom)
-                
-                Spacer()
-                
-                // MARK: - Page Title
-                HStack {
+                VStack (alignment: .leading) {
+                    
+                    // MARK: - Back Button
+                    
+                    BackButtonView {
+                        showOTPView = false
+                    }
+                    
+                    Spacer()
+                    
+                    // MARK: - Page Title
+                    HStack {
+                        VStack (alignment: .leading) {
+                            
+                            Text("Verify your email")
+                                .font(.caption)
+                            
+                            Text("Email Verification")
+                                .font(.largeTitle)
+                            
+                        }
+                        
+                        Spacer()
+                    }
+                    .foregroundStyle(Color.white)
+                    .frame(width: UIScreen.main.bounds.width / 1.2)
+                    .padding(.top, 50)
+                    .padding(.bottom, 25)
+                    
+                    
+                    // MARK: - Content
                     VStack (alignment: .leading) {
+                        Text("Enter the verification code we just sent to your email address")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                            .padding(.vertical)
+                            .frame(width: UIScreen.main.bounds.width / 1.2, alignment: .leading)
                         
-                        Text("Verify your email")
-                            .font(.caption)
+                        Text(email)
+                            .font(.headline)
                         
-                        Text("Email Verification")
-                            .font(.largeTitle)
+                        // MARK: - OTP Fields
                         
+                        HStack(alignment: .center, spacing: 15) {
+                            ForEach(0..<4) { index in
+                                OTPTextField(otp: $otp[index])
+                                    .onChange(of: otp[index]) { newValue in
+                                        if newValue.count > 1 {
+                                            otp[index] = String(newValue.last!)
+                                        }
+                                        
+                                        if newValue.count == 1 {
+                                            moveToNextField(current: index)
+                                        }
+                                    }
+                                    .focused($inFocus, equals: index)
+                            }
+                        }
+                        .padding()
+                        .frame(width: UIScreen.main.bounds.width / 1.2, alignment: .center)
+                        
+                        // MARK: - Resend OTP
+                        
+                        HStack {
+                            Text("\(formattedTime(timeRemaining))")
+                                .font(.subheadline)
+                            Button(action: resendOTP) {
+                                Text("Resend OTP")
+                                    .font(.subheadline)
+                                    .foregroundStyle(canResend ? Color.accentColor : .secondary)
+                            }
+                        }
+                        .frame(width: UIScreen.main.bounds.width / 1.2, alignment: .center)
+                        
+                        ButtonView(text: "Create Account", action: {})
+                            .padding(.top)
+                        // navigate to email verification
                     }
                     
                     Spacer()
                 }
-                .foregroundStyle(Color.white)
-                .frame(width: UIScreen.main.bounds.width / 1.2)
-                .padding(.top, 50)
-                .padding(.bottom, 25)
-                
-                
-                // MARK: - Content
-                VStack (alignment: .leading) {
-                    Text("Enter the verification code we just sent to your email address")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                        .padding(.vertical)
-                        .frame(width: UIScreen.main.bounds.width / 1.2, alignment: .leading)
-                    
-                    Text(email)
-                        .font(.headline)
-                    
-                    // MARK: - OTP Fields
-                    
-                    HStack(alignment: .center, spacing: 15) {
-                        ForEach(0..<4) { index in
-                            OTPTextField(otp: $otp[index])
-                                .onChange(of: otp[index]) { newValue in
-                                    if newValue.count > 1 {
-                                        otp[index] = String(newValue.last!)
-                                    }
-                                    
-                                    if newValue.count == 1 {
-                                        moveToNextField(current: index)
-                                    }
-                                }
-                                .focused($inFocus, equals: index)
-                        }
-                    }
-                    .padding()
-                    .frame(width: UIScreen.main.bounds.width / 1.2, alignment: .center)
-                    
-                    // MARK: - Resend OTP
-                    
-                    HStack {
-                        Text("\(formattedTime(timeRemaining))")
-                            .font(.subheadline)
-                        Button(action: resendOTP) {
-                            Text("Resend OTP")
-                                .font(.subheadline)
-                                .foregroundStyle(canResend ? Color.accentColor : .secondary)
-                        }
-                    }
-                    .frame(width: UIScreen.main.bounds.width / 1.2, alignment: .center)
-                    
-                    ButtonView(text: "Create Account")
-                        .padding(.top)
-                        .onTapGesture {
-                            print(otp)
-                        }
-                    // navigate to email verification
+                .onAppear{
+                    startTimer()
                 }
-                
-                Spacer()
-            }
-            .onAppear{
-                startTimer()
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
     
     func startTimer() {
@@ -157,7 +153,7 @@ struct EmailVerificationOTPView: View {
 
 
 #Preview {
-    EmailVerificationOTPView()
+    EmailVerificationOTPView(showOTPView: .constant(true))
 }
 
 struct OTPTextField: View {

@@ -9,78 +9,97 @@ import SwiftUI
 
 struct EmailVerificationView: View {
     
+    @ObservedObject var viewModel = SignupViewModel()
     @State private var email = ""
     
+    @Binding var showEmailVerificationView: Bool
+    @State var showOTPView: Bool = false
+    
     var body: some View {
-        ZStack {
-            Image(.background)
-                .resizable()
-                .scaledToFill()
-                .edgesIgnoringSafeArea(.all)
-                .overlay(Color.black.opacity(0.5))
-            
-            RoundedRectangle(cornerRadius: 30)
-                .fill(.background)
-                .frame(width: UIScreen.main.bounds.width / 1, height: UIScreen.main.bounds.height / 1.7)
-                .offset(y: 200)
-                .ignoresSafeArea()
-            
-            VStack (alignment: .leading) {
+        NavigationStack {
+            ZStack {
+                Image(.background)
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+                    .overlay(Color.black.opacity(0.5))
                 
-                // MARK: - Back Button
+                RoundedRectangle(cornerRadius: 30)
+                    .fill(.background)
+                    .frame(width: UIScreen.main.bounds.width / 1, height: UIScreen.main.bounds.height / 1.7)
+                    .offset(y: 200)
+                    .ignoresSafeArea()
                 
-                Image(systemName: "chevron.left")
-                    .foregroundStyle(.background)
-                    .padding()
-                    .frame(width: 40, height: 40)
-                    .background(
-                        Circle()
-                            .fill(Color.white.opacity(0.4))
-                    )
-                    .padding(.bottom)
-                
-                Spacer()
-                                
-                // MARK: - Page Title
-                HStack {
+                VStack (alignment: .leading) {
+                    
+                    // MARK: - Back Button
+                    
+                    BackButtonView() {
+                            // navigate to previous screen
+                            showEmailVerificationView = false
+                        }
+                    
+                    Spacer()
+                                    
+                    // MARK: - Page Title
+                    HStack {
+                        VStack (alignment: .leading) {
+                            
+                            Text("Verify your email")
+                                .font(.caption)
+                            
+                            Text("Email Verification")
+                                .font(.largeTitle)
+                            
+                        }
+                        
+                        Spacer()
+                    }
+                    .foregroundStyle(Color.white)
+                    .frame(width: UIScreen.main.bounds.width / 1.2)
+                    .padding(.bottom, 50)
+
+                    // MARK: - TextFields
                     VStack (alignment: .leading) {
+                        Text("Enter the email address to get verified")
+                            .font(.subheadline)
+                            .padding(.bottom)
                         
-                        Text("Verify your email")
-                            .font(.caption)
+                        Text("Email")
+                            .font(.headline)
+                        TextFieldView(isTextVisible: .constant(true), placeholder: "Enter your email", text: $email)
+                            .padding(.bottom)
                         
-                        Text("Email Verification")
-                            .font(.largeTitle)
-                        
+                        ButtonView(text: "Verify Email Address", action: verifyEmail)
+                            
+                        // navigate to email verification
+                    }
+                    .navigationDestination(isPresented: $showOTPView) {
+                        EmailVerificationOTPView(showOTPView: $showOTPView)
                     }
                     
                     Spacer()
                 }
-                .foregroundStyle(Color.white)
-                .frame(width: UIScreen.main.bounds.width / 1.2)
-                .padding(.bottom, 50)
-
-                // MARK: - TextFields
-                VStack (alignment: .leading) {
-                    Text("Enter the email address to get verified")
-                        .font(.subheadline)
-                        .padding(.bottom)
-                    
-                    Text("Email")
-                        .font(.headline)
-                    TextFieldView(isTextVisible: .constant(true), placeholder: "Enter your email", text: $email)
-                        .padding(.bottom)
-                    
-                    ButtonView(text: "Verify Email Address")
-                        
-                    // navigate to email verification
-                }
-                
-                Spacer()
             }
+            .navigationBarBackButtonHidden(true)
         }
+    }
+    
+    func verifyEmail() {
+        updateEmail()
+        
+        
+        
+        showOTPView = true
+    }
+    
+    func updateEmail() {
+        SignupViewModel.shared.user.email = email
+        
+        print(SignupViewModel.shared.user)
     }
 }
 
 #Preview {
-    EmailVerificationView()
+    EmailVerificationView(showEmailVerificationView: .constant(true))
 }

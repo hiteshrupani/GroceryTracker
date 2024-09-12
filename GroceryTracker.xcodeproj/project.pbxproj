@@ -23,6 +23,8 @@
 		67BCAF3D2C920DE300EFEF7E /* EmailVerificationOTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCAF3C2C920DE300EFEF7E /* EmailVerificationOTPView.swift */; };
 		67BCAF3F2C9223CD00EFEF7E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCAF3E2C9223CD00EFEF7E /* HomeView.swift */; };
 		67BCAF412C9223EE00EFEF7E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCAF402C9223EE00EFEF7E /* LoginViewModel.swift */; };
+		67BCAF432C92243B00EFEF7E /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCAF422C92243B00EFEF7E /* SignupViewModel.swift */; };
+		67BCAF472C92250F00EFEF7E /* BackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCAF462C92250F00EFEF7E /* BackButtonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,8 @@
 		67BCAF3C2C920DE300EFEF7E /* EmailVerificationOTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationOTPView.swift; sourceTree = "<group>"; };
 		67BCAF3E2C9223CD00EFEF7E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		67BCAF402C9223EE00EFEF7E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		67BCAF422C92243B00EFEF7E /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
+		67BCAF462C92250F00EFEF7E /* BackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,10 +79,10 @@
 		67407EA92C91A1A00028AED8 /* GroceryTracker */ = {
 			isa = PBXGroup;
 			children = (
+				67407EAA2C91A1A00028AED8 /* GroceryTrackerApp.swift */,
 				67407EBF2C91A54A0028AED8 /* Views */,
 				67407EC02C91A5530028AED8 /* ViewModels */,
 				67407EBE2C91A5450028AED8 /* Models */,
-				67407EAA2C91A1A00028AED8 /* GroceryTrackerApp.swift */,
 				67407EAC2C91A1A00028AED8 /* ContentView.swift */,
 				67407EAE2C91A1A10028AED8 /* Assets.xcassets */,
 				67407EB02C91A1A10028AED8 /* Preview Content */,
@@ -112,9 +116,10 @@
 				67BCAF382C920A3400EFEF7E /* SignupView.swift */,
 				67BCAF3A2C920B2A00EFEF7E /* EmailVerificationView.swift */,
 				67BCAF3C2C920DE300EFEF7E /* EmailVerificationOTPView.swift */,
+				67BCAF3E2C9223CD00EFEF7E /* HomeView.swift */,
+				67BCAF462C92250F00EFEF7E /* BackButtonView.swift */,
 				67407EC12C91ACBF0028AED8 /* ButtonView.swift */,
 				67407EC32C91ACD00028AED8 /* TextFieldView.swift */,
-				67BCAF3E2C9223CD00EFEF7E /* HomeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -123,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				67BCAF402C9223EE00EFEF7E /* LoginViewModel.swift */,
+				67BCAF422C92243B00EFEF7E /* SignupViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -203,6 +209,8 @@
 				67407EC42C91ACD00028AED8 /* TextFieldView.swift in Sources */,
 				67407EAD2C91A1A00028AED8 /* ContentView.swift in Sources */,
 				67BCAF3B2C920B2A00EFEF7E /* EmailVerificationView.swift in Sources */,
+				67BCAF432C92243B00EFEF7E /* SignupViewModel.swift in Sources */,
+				67BCAF472C92250F00EFEF7E /* BackButtonView.swift in Sources */,
 				67BCAF412C9223EE00EFEF7E /* LoginViewModel.swift in Sources */,
 				67BCAF392C920A3400EFEF7E /* SignupView.swift in Sources */,
 				67BCAF3D2C920DE300EFEF7E /* EmailVerificationOTPView.swift in Sources */,

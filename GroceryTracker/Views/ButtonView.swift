@@ -10,11 +10,10 @@ import SwiftUI
 struct ButtonView: View {
     
     var text: String
+    var action: () -> Void
     
     var body: some View {
-        Button {
-            
-        } label: {
+        Button (action: action){
             Text(text)
                 .padding()
                 .frame(width: UIScreen.main.bounds.width /  1.2, height: 50)
@@ -30,7 +29,7 @@ struct ButtonView: View {
 
 struct ButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        ButtonView(text: "Login")
+        ButtonView(text: "Login", action: {})
             .previewLayout(.sizeThatFits)
     }
 }
